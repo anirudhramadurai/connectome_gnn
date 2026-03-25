@@ -258,6 +258,6 @@ nilearn>=0.10
 
 ## Acknowledgements
 
-Developed as an independent project, drawing on methods from BIME 534 (Biology & Informatics, University of Washington). Data from the ABIDE Preprocessed Connectomes Project, downloaded via nilearn.
+Developed as an independent computational neuroscience project. Data from the ABIDE Preprocessed Connectomes Project, downloaded via nilearn.
 
 *University of Washington — Independent Project*
