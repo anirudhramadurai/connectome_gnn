@@ -1,0 +1,5 @@
+Metric,Mean,SD
+Accuracy,0.515,0.05
+AUC-ROC,0.514,0.042
+Sensitivity (ASD),0.566,0.052
+Specificity (CTRL),0.462,0.087
