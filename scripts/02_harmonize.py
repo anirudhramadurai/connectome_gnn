@@ -136,34 +136,42 @@ def reconstruct_matrices(tri_data_harmonized, tri_idx, N, R):
     return connectomes_harmonized
 
 
-def run_combat(tri_data, sites):
+def run_combat(tri_data, sites, labels):
     """
     Apply ComBat site harmonization to the connectivity feature matrix.
 
     ComBat expects a (features x samples) matrix and a covariate DataFrame
-    with a column identifying the batch (site) for each sample. The
-    empirical Bayes estimation borrows strength across the 19,900 connectivity
-    features to produce stable site effect estimates even with modest
-    sample sizes per site.
+    with a column identifying the batch (site) for each sample. Crucially,
+    the diagnostic label (ASD vs Control) must be passed as a protected
+    biological covariate. Without this, ComBat cannot distinguish biological
+    variance from site variance and will remove both -- which is why AUC
+    degrades when diagnosis is omitted.
 
     Parameters
     ----------
     tri_data : (19900, N) feature matrix
     sites    : (N,) array of site strings
+    labels   : (N,) int array -- 1 = ASD, 0 = Control
 
     Returns
     -------
-    harmonized : (19900, N) array with site effects removed
+    harmonized : (19900, N) array with site effects removed,
+                 biological ASD-vs-Control signal preserved
     """
-    covars = pd.DataFrame({"site": sites})
+    covars = pd.DataFrame({
+        "site":      sites,
+        "diagnosis": labels.astype(int),
+    })
 
     print(f"  Running ComBat on {tri_data.shape[0]} features x {tri_data.shape[1]} subjects")
     print(f"  Sites: {dict(pd.Series(sites).value_counts())}")
+    print(f"  Protecting diagnosis covariate (ASD=1, CTRL=0)")
 
     result = neuroCombat(
-        dat        = tri_data,
-        covars     = covars,
-        batch_col  = "site",
+        dat              = tri_data,
+        covars           = covars,
+        batch_col        = "site",
+        categorical_cols = ["diagnosis"],
     )
 
     return result["data"]
@@ -220,7 +228,7 @@ def main():
     tri_data, tri_idx = extract_upper_triangle(connectomes)
 
     print("\nApplying ComBat ...")
-    tri_harmonized = run_combat(tri_data, sites)
+    tri_harmonized = run_combat(tri_data, sites, labels)
 
     print("\nReconstructing connectivity matrices ...")
     connectomes_harmonized = reconstruct_matrices(tri_harmonized, tri_idx, N, R)
