@@ -69,7 +69,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-# -- Configuration ------------------------------------------------------------
+# Configuration
 
 N_FOLDS     = 5
 RANDOM_SEED = 42
@@ -79,7 +79,7 @@ RESULTS_DIR = Path(__file__).parent.parent / "results"
 RESULTS_DIR.mkdir(exist_ok=True)
 
 
-# -- Load ---------------------------------------------------------------------
+# Load
 
 def load_data():
     """Load graph objects, ROI metadata, and subject metadata."""
@@ -95,7 +95,7 @@ def load_data():
     return graphs, labels, networks, nets
 
 
-# -- Feature extraction -------------------------------------------------------
+# Feature extraction
 
 def extract_features(graph, networks, nets):
     """
@@ -167,7 +167,7 @@ def build_feature_matrix(graphs, networks, nets):
     return np.stack([extract_features(g, networks, nets) for g in graphs])
 
 
-# -- Cross-validation ---------------------------------------------------------
+# Cross-validation
 
 def run_cv(X, labels, graphs, networks):
     """
@@ -247,7 +247,7 @@ def run_cv(X, labels, graphs, networks):
     return fold_results, all_probs, node_imp
 
 
-# -- Summary ------------------------------------------------------------------
+# Summary
 
 def print_summary(fold_results):
     """Print mean +/- SD for each metric across folds."""
@@ -270,7 +270,7 @@ def print_summary(fold_results):
     return rows
 
 
-# -- Save ---------------------------------------------------------------------
+# Save
 
 def save(fold_results, all_probs, labels, node_imp, summary_rows):
     """Save cross-validation results and summary metrics."""
@@ -292,7 +292,7 @@ def save(fold_results, all_probs, labels, node_imp, summary_rows):
     print("\nNext: python scripts/04_figures.py")
 
 
-# -- Main ---------------------------------------------------------------------
+# Main
 
 def main():
     graphs, labels, networks, nets = load_data()

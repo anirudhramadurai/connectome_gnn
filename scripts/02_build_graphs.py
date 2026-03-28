@@ -45,14 +45,14 @@ import pickle
 import numpy as np
 from pathlib import Path
 
-# -- Configuration ------------------------------------------------------------
+# Configuration
 
 THRESHOLD = 0.20   # absolute Fisher z threshold for edge inclusion
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 
 
-# -- Load ---------------------------------------------------------------------
+# Load
 
 def load_data():
     """Load connectomes, labels, and ROI metadata from data/."""
@@ -65,7 +65,7 @@ def load_data():
     return connectomes, labels, roi_meta
 
 
-# -- Graph construction -------------------------------------------------------
+# Graph construction
 
 def build_edge_list(mat, threshold=THRESHOLD):
     """
@@ -129,7 +129,7 @@ def compute_node_features(mat, threshold=THRESHOLD):
     return np.stack([mean_fc, degree, clust, pos_fc, neg_fc], axis=1).astype(np.float32)
 
 
-# -- Process all subjects -----------------------------------------------------
+# Process all subjects
 
 def build_all_graphs(connectomes, labels):
     """
@@ -171,7 +171,7 @@ def build_all_graphs(connectomes, labels):
     return graphs, np.array(edge_counts)
 
 
-# -- Summary ------------------------------------------------------------------
+# Summary
 
 def print_summary(graphs, edge_counts, labels):
     """Print graph construction statistics."""
@@ -188,7 +188,7 @@ def print_summary(graphs, edge_counts, labels):
     print(f"\n  Mean edges -- ASD: {asd_edges:.0f}  |  CTRL: {ctrl_edges:.0f}")
 
 
-# -- Save ---------------------------------------------------------------------
+# Save
 
 def save(graphs):
     """Save graph objects to data/graphs.pkl."""
@@ -199,7 +199,7 @@ def save(graphs):
     print("Next: python scripts/03_train_evaluate.py")
 
 
-# -- Main ---------------------------------------------------------------------
+# Main
 
 def main():
     connectomes, labels, roi_meta = load_data()

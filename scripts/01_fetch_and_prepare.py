@@ -58,7 +58,7 @@ import pandas as pd
 from pathlib import Path
 from nilearn import datasets
 
-# -- Configuration ------------------------------------------------------------
+# Configuration
 
 SITES        = ["NYU", "USM", "UCLA_1"]   # three large, well-characterised sites
 MAX_PER_SITE = None                        # None = all available subjects
@@ -81,7 +81,7 @@ NETWORK_MAP = {
 }
 
 
-# -- Download -----------------------------------------------------------------
+# Download
 
 def download_abide():
     """
@@ -117,7 +117,7 @@ def download_abide():
     return pheno, ts_files
 
 
-# -- Compute connectomes ------------------------------------------------------
+# Compute connectomes
 
 def compute_connectomes(pheno, ts_files):
     """
@@ -187,7 +187,7 @@ def compute_connectomes(pheno, ts_files):
     return connectomes, labels, subject_ids, sites
 
 
-# -- Build ROI metadata -------------------------------------------------------
+# Build ROI metadata
 
 def build_roi_meta():
     """
@@ -212,7 +212,7 @@ def build_roi_meta():
     return roi_names, networks
 
 
-# -- Save outputs -------------------------------------------------------------
+# Save outputs
 
 def save(connectomes, labels, subject_ids, sites, roi_names, networks):
     """
@@ -258,7 +258,7 @@ def save(connectomes, labels, subject_ids, sites, roi_names, networks):
     print("\nNext: python scripts/02_build_graphs.py")
 
 
-# -- Main ---------------------------------------------------------------------
+# Main
 
 def main():
     print("=" * 60)

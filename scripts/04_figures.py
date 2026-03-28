@@ -65,7 +65,7 @@ from pathlib import Path
 from sklearn.metrics import roc_curve, auc as sk_auc
 from sklearn.model_selection import StratifiedKFold
 
-# -- Style --------------------------------------------------------------------
+# Style
 
 plt.rcParams.update({
     "font.family":       "DejaVu Sans",
@@ -99,7 +99,7 @@ OUTDIR      = Path(__file__).parent.parent / "figures"
 OUTDIR.mkdir(exist_ok=True)
 
 
-# -- Load ---------------------------------------------------------------------
+# Load
 
 def load_data():
     """Load all pipeline outputs needed for figure generation."""
@@ -120,7 +120,7 @@ def load_data():
     return connectomes, labels, metadata, graphs, networks, nets, res
 
 
-# -- Figure 1: Connectivity matrices ------------------------------------------
+# Figure 1: Connectivity matrices
 
 def fig1_matrices(connectomes, labels, networks, nets):
     """
@@ -172,7 +172,7 @@ def fig1_matrices(connectomes, labels, networks, nets):
     print("Fig 1 saved")
 
 
-# -- Figure 2: Brain graph visualisation --------------------------------------
+# Figure 2: Brain graph visualisation
 
 def fig2_graph_viz(graphs, networks, nets):
     """
@@ -238,7 +238,7 @@ def fig2_graph_viz(graphs, networks, nets):
     print("Fig 2 saved")
 
 
-# -- Figure 3: Node feature distributions -------------------------------------
+# Figure 3: Node feature distributions
 
 def fig3_features(graphs):
     """
@@ -289,7 +289,7 @@ def fig3_features(graphs):
     print("Fig 3 saved")
 
 
-# -- Figure 4: Per-fold classification performance ----------------------------
+# Figure 4: Per-fold classification performance
 
 def fig4_performance(res):
     """
@@ -333,7 +333,7 @@ def fig4_performance(res):
     print("Fig 4 saved")
 
 
-# -- Figure 5: ROC curves -----------------------------------------------------
+# Figure 5: ROC curves
 
 def fig5_roc(res):
     """
@@ -384,7 +384,7 @@ def fig5_roc(res):
     print("Fig 5 saved")
 
 
-# -- Figure 6: Node importance heatmap ----------------------------------------
+# Figure 6: Node importance heatmap
 
 def fig6_node_importance(res, networks, nets):
     """
@@ -435,7 +435,7 @@ def fig6_node_importance(res, networks, nets):
     print("Fig 6 saved")
 
 
-# -- Main ---------------------------------------------------------------------
+# Main
 
 def main():
     connectomes, labels, metadata, graphs, networks, nets, res = load_data()
