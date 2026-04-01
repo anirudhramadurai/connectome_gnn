@@ -1,5 +1,5 @@
 """
-05_figures.py
+06_figures.py
 -------------
 Generates 6 publication-quality figures from the harmonized ABIDE connectome
 pipeline.
@@ -35,7 +35,7 @@ Figure 6 -- Node importance heatmap (brain network x feature)
 
 Usage
 -----
-  python scripts/05_figures.py
+  python scripts/06_figures.py
 
 Inputs
 ------
@@ -45,6 +45,7 @@ Inputs
   data/graphs.pkl                   from 03_build_graphs.py
   data/roi_meta.pkl                 from 01_fetch_and_prepare.py
   results/cv_results.pkl            from 04_train_evaluate.py
+  results/gnn_cv_results.pkl        from 05_gnn_train_evaluate.py and 05_gnn_train_evaluate.py
 
 Outputs
 -------
